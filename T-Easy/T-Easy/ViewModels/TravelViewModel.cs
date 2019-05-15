@@ -3,7 +3,7 @@ using T_Easy.Models;
 
 namespace T_Easy.ViewModels
 {
-    public class TravelViewModel : INotifyPropertyChanged
+    public class TravelViewModel : ObservableObject
     {
         #region Construction
         public TravelViewModel()
