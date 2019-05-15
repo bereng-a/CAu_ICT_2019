@@ -1,0 +1,45 @@
+﻿<Window x:Class="T_Easy.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:T_Easy"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="T-Easy" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Ressources/background.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <materialDesign:Card VerticalAlignment="Center" Margin="100,106,99.6,144" Height="170" Opacity="0.8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="155*" />
+                    <ColumnDefinition Width="240*" />
+                    <ColumnDefinition Width="198*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sharing code"  Width="95" Height="32" Margin="27,30,33.2,22.8"/>
+                <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="235" Text="{Binding SharingCode}"   Height="40" Grid.ColumnSpan="2" Margin="9.8,22,193.6,22.8" />
+                <Button Grid.Row="0" Grid.Column="2" Name="Join_Button" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Join !"  Width="98" Height="25" Margin="49.8,30,50.6,29.8" Click="Join_Button_Click"/>
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create travel" Width="95" Height="32" Margin="27,30.2,33.2,22.6"/>
+                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="235" Text="{Binding Name}"  Height="40" Grid.ColumnSpan="2" Margin="9.8,22.2,193.6,22.6"  />
+                <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create !"  Width="98" Height="25" Margin="49.8,30.2,50.6,29.6" Click="Button_Click"/>
+
+            </Grid>
+        </materialDesign:Card>
+
+    </Grid>
+</Window>
