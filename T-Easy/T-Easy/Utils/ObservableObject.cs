@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace T_Easy.ViewModels
+namespace T_Easy.Utils
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {

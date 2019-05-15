@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace T_Easy.ViewModels
+namespace T_Easy.Utils
 {
     public class RelayCommand : ICommand
     {

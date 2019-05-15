@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using T_Easy.Models;
+using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
 {
@@ -33,7 +35,9 @@ namespace T_Easy.ViewModels
         {
             get
             {
-                return _travel.SharingCode;
+                Models.DataContext context = new Models.DataContext();
+                var user = context.User.First();
+                return user.FamilyName;
             }
             set
             {

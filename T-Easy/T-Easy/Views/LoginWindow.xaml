@@ -16,7 +16,7 @@
         Title="T-Easy" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Ressources/background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="../Ressources/background.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <materialDesign:Card VerticalAlignment="Center" Margin="100,106,99.6,144" Height="170" Opacity="0.8">
