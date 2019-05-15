@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Content="Sharing code" />
+        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="252" Text="{Binding SharingCode}" Margin="0,10,110.6,0" Height="34" VerticalAlignment="Top" />
     </Grid>
 </Window>
