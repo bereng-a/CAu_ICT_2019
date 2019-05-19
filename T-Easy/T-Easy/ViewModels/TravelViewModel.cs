@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using T_Easy.Models;
+﻿using T_Easy.Helper;
 using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
@@ -10,70 +8,31 @@ namespace T_Easy.ViewModels
         #region Construction
         public TravelViewModel()
         {
-            _travel = new Travel { Name = null, SharingCode = null };
+          
         }
         #endregion
 
-        #region Members
-        Travel _travel;
-        #endregion
 
         #region Properties
-        public Travel Travel
-        {
-            get
-            {
-                return _travel;
-            }
-            set
-            {
-                _travel = value;
-            }
-        }
+        public string SharingCode { get; set; }
 
-        public string SharingCode
-        {
-            get
-            {
-                Models.DataContext context = new Models.DataContext();
-                var user = context.User.First();
-                return user.FamilyName;
-            }
-            set
-            {
-                _travel.SharingCode = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return _travel.Name;
-            }
-            set
-            {
-                _travel.Name = value;
-            }
-        }
+        public string Name { get; set; }
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
 
         #region Methods
-
-        private void RaisePropertyChanged(string propertyName)
+        public bool Create()
         {
-            // take a copy to prevent thread issues
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            TravelHelper.Instance.CreateTravel(Name);
+            return true;
+        }
+
+        public bool Join()
+        {
+            if (TravelHelper.Instance.JoinTravel(SharingCode))
+                return true;
+            else
+                return false;
         }
         #endregion
     }
