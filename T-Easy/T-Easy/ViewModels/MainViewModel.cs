@@ -20,6 +20,7 @@ namespace T_Easy.ViewModels
         {
             // Add available pages
             PageViewModels.Add(new HomeViewModel());
+            PageViewModels.Add(new UserViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
