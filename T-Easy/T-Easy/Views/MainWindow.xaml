@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type local:UserViewModel}">
             <local1:UserView></local1:UserView>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:UserAddViewModel}">
+            <local1:UserAddView></local1:UserAddView>
+        </DataTemplate>
     </Window.Resources>
  
 
@@ -31,10 +34,11 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" 
-                                ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                ToolTip="{Binding Icon}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding}"
-                                Margin="8">
+                                Margin="8"
+                                Visibility="{Binding Visible}">
                             <materialDesign:PackIcon Kind="{Binding Icon}" Height="24" Width="24" />
                         </Button>
                     </DataTemplate>

@@ -21,6 +21,7 @@ namespace T_Easy.ViewModels
             // Add available pages
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new UserViewModel());
+            PageViewModels.Add(new UserAddViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
@@ -74,7 +75,7 @@ namespace T_Easy.ViewModels
 
         #region Methods
 
-        private void ChangeViewModel(IPageViewModel viewModel)
+        public void ChangeViewModel(IPageViewModel viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
                 PageViewModels.Add(viewModel);
