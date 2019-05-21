@@ -30,9 +30,9 @@ namespace T_Easy
             }
         }
 
-        private void Join_Button_Click(object sender, RoutedEventArgs e)
+        private async void Join_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (_travelViewModel.Join())
+            if (await _travelViewModel.Join())
             {
                 SwitchToMain();
             }

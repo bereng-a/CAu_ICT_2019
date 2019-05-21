@@ -1,4 +1,5 @@
-﻿using T_Easy.Helper;
+﻿using System.Threading.Tasks;
+using T_Easy.Helper;
 using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
@@ -27,9 +28,9 @@ namespace T_Easy.ViewModels
             return true;
         }
 
-        public bool Join()
+        public async Task<bool> Join()
         {
-            if (TravelHelper.Instance.JoinTravel(SharingCode))
+            if (await TravelHelper.Instance.JoinTravel(SharingCode))
                 return true;
             else
                 return false;

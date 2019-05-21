@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using T_Easy.Helper;
 using T_Easy.Models;
@@ -19,21 +19,21 @@ namespace T_Easy.ViewModels
 
         public UserViewModel()
         {
-                Users = getData();
+            getData();
         }
 
-        private ObservableCollection<User> getData()
+        private async void getData()
         {
             Models.DataContext context = new Models.DataContext();
-            var user = context.User.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).ToList();
-            return new ObservableCollection<User>(user);
+            var user = await context.User.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).ToListAsync();
+            Users = new ObservableCollection<User>(user);
         }
 
-        public void CreateUser()
+        public async void CreateUser()
         {
             Models.DataContext context = new Models.DataContext();
-            context.User.Add(new User { FamilyName = FamilyName, Name = Name, TravelId = TravelHelper.Instance.Travel.Id });
-            context.SaveChanges();
+            await context.User.AddAsync(new User { FamilyName = FamilyName, Name = Name, TravelId = TravelHelper.Instance.Travel.Id });
+            await context.SaveChangesAsync();
         }
 
     }

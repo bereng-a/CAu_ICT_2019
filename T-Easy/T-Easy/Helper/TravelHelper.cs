@@ -3,6 +3,8 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 using T_Easy.Models;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace T_Easy.Helper
 {
@@ -45,12 +47,12 @@ namespace T_Easy.Helper
         #endregion
 
         #region Methods
-        public bool JoinTravel(string sharingCode)
+        public async Task<bool> JoinTravel(string sharingCode)
         {
             Models.DataContext context = new Models.DataContext();
             try
             {
-                var travel = context.Travel.Single(t => t.SharingCode == sharingCode);
+                var travel = await context.Travel.SingleAsync(t => t.SharingCode == sharingCode);
                 _travel = travel;
                 return true;
             }
@@ -60,14 +62,15 @@ namespace T_Easy.Helper
             }
         }
 
-        public void CreateTravel(string name)
+        public async void CreateTravel(string name)
         {
             var createdAt = DateTime.Now;
             var sharingCode = GetHashString(createdAt.ToString());
             Models.DataContext context = new Models.DataContext();
 
-            _travel = context.Travel.Add(new Travel { SharingCode = sharingCode, CreatedAt = createdAt, Name = name }).Entity;
-            context.SaveChanges();
+            var tmp = await context.Travel.AddAsync(new Travel { SharingCode = sharingCode, CreatedAt = createdAt, Name = name });
+            _travel = tmp.Entity;
+            await context.SaveChangesAsync();
         }
 
         private static byte[] GetHash(string inputString)
