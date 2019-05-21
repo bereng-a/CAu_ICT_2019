@@ -170,10 +170,18 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Travel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="ViewModels\TransactionAddViewModel.cs" />
+    <Compile Include="ViewModels\TransactionsViewModel.cs" />
     <Compile Include="ViewModels\UserAddViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionAddView.xaml.cs">
+      <DependentUpon>TransactionAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionsView.xaml.cs">
+      <DependentUpon>TransactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAddView.xaml.cs">
       <DependentUpon>UserAddView.xaml</DependentUpon>
@@ -207,6 +215,13 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionAddView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

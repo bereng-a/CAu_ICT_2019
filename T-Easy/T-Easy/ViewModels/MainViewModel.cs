@@ -22,6 +22,8 @@ namespace T_Easy.ViewModels
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new UserViewModel());
             PageViewModels.Add(new UserAddViewModel());
+            PageViewModels.Add(new TransactionsViewModel());
+            PageViewModels.Add(new TransactionAddViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
