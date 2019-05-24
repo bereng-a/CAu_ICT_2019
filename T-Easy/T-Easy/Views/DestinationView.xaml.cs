@@ -37,10 +37,8 @@ namespace T_Easy.Views
             if (_viewModel.CheckPlace(DestinationTextBox.Text))
             {
                 CheckAddress = true;
-                Console.WriteLine("DateTo " + DateTo + " DateFrom " + DateFrom);
                 if (DateTo && DateFrom)
                 {
-                    Console.WriteLine("ENABLEEEE");
                     AddButton.IsEnabled = true;
                 }
             }
@@ -64,7 +62,6 @@ namespace T_Easy.Views
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine("CHANNNGENNEEN");
             DateFrom = true;
             if (DateTo && CheckAddress)
                 AddButton.IsEnabled = true;
@@ -73,7 +70,6 @@ namespace T_Easy.Views
 
         private void DatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine("AAAAAAAAAAAA");
             DateTo = true;
             if (DateFrom && CheckAddress)
                 AddButton.IsEnabled = true;

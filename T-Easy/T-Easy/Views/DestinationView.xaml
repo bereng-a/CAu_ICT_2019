@@ -30,7 +30,7 @@
                                         <DataTemplate>
                                             <TextBlock>
                                                 <TextBlock.Text>
-                                                    <Binding Path="FromDate" StringFormat="{}{0:MM/dd/yyyy}"/>
+                                                    <Binding Path="FromDate" StringFormat="{}{MM/dd/yyyy}"/>
                                                 </TextBlock.Text>
                                             </TextBlock>
                                         </DataTemplate>
@@ -41,13 +41,13 @@
                                         <DataTemplate>
                                             <TextBlock>
                                                 <TextBlock.Text>
-                                                    <Binding Path="ToDate" StringFormat="{}{0:MM/dd/yyyy}"/>
+                                                    <Binding Path="ToDate" StringFormat="{}{MM/dd/yyyy}"/>
                                                 </TextBlock.Text>
                                             </TextBlock>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn  Header="Address" />
+                                <GridViewColumn  Header="Address" DisplayMemberBinding="{Binding Address}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

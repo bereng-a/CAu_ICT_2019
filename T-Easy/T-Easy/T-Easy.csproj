@@ -176,6 +176,8 @@
     <Compile Include="Models\Travel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\DestinationViewModel.cs" />
+    <Compile Include="ViewModels\TransactionAddViewModel.cs" />
+    <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\UserAddViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\DestinationView.xaml.cs">

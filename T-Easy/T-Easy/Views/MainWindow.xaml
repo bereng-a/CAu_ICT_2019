@@ -28,6 +28,12 @@
         <DataTemplate DataType="{x:Type local:DestinationViewModel}">
             <local1:DestinationView></local1:DestinationView>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TransactionViewModel}">
+            <local1:TransactionsView></local1:TransactionsView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TransactionAddViewModel}">
+            <local1:TransactionAddView></local1:TransactionAddView>
+        </DataTemplate>
     </Window.Resources>
 
 

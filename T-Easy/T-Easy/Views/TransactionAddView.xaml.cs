@@ -5,7 +5,7 @@ namespace T_Easy.Views
 {
     public partial class TransactionAddView : UserControl
     {
-        TransactionsViewModel _viewModel = new TransactionsViewModel();
+        TransactionViewModel _viewModel = new TransactionViewModel();
         public TransactionAddView()
         {
             InitializeComponent();

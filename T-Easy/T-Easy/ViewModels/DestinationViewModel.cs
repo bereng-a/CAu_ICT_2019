@@ -20,6 +20,11 @@ namespace T_Easy.ViewModels
         public ObservableCollection<Destination> Destinations { get; set; }
         #endregion
 
+        public DestinationViewModel()
+        {
+            Destinations = DestinationHelper.Instance.Destinations;
+        }
+
         #region Methods
         public bool CheckPlace(string address)
         {
@@ -40,7 +45,7 @@ namespace T_Easy.ViewModels
 
         public void AddDestination()
         {
-            DestinationHelper.Instance.AddDestination();
+            DestinationHelper.Instance.AddDestination(new Destination { FromDate = NewDestinationFrom, ToDate = NewDestinationTo, Address = Address});
             Destinations = DestinationHelper.Instance.Destinations;
             OnPropertyChanged("Destinations");
         }

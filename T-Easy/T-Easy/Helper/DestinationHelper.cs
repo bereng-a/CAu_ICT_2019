@@ -1,6 +1,7 @@
 ﻿using Google.Maps;
 using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,11 +24,14 @@ namespace T_Easy.Helper
         #region Construction
         static DestinationHelper()
         {
+
         }
 
-        private DestinationHelper
-()
+        private DestinationHelper()
         {
+            Models.DataContext context = new Models.DataContext();
+            var destinations = context.Destination.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).ToList();
+            _destinations = new ObservableCollection<Destination>(destinations);
         }
         #endregion
 
@@ -84,9 +88,13 @@ namespace T_Easy.Helper
             return img;
         }
 
-        public void AddDestination()
+        public void AddDestination(Destination destination)
         {
-
+            destination.TravelId = TravelHelper.Instance.Travel.Id;
+            Models.DataContext context = new Models.DataContext();
+            context.Destination.Add(destination);
+            context.SaveChanges();
+            _destinations.Add(destination);
         }
     }
 }

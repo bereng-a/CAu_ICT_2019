@@ -7,10 +7,10 @@ using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
 {
-    class TransactionsViewModel : ObservableObject, IPageViewModel, INotifyPropertyChanged
+    class TransactionViewModel : ObservableObject, IPageViewModel, INotifyPropertyChanged
     {
         #region Construction
-        public TransactionsViewModel()
+        public TransactionViewModel()
         {
             Transactions = getTransaction();
             Users = getUsers();

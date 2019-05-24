@@ -10,7 +10,7 @@ namespace T_Easy.Views
     /// </summary>
     public partial class TransactionsView : UserControl
     {
-        TransactionsViewModel _viewModel = new TransactionsViewModel();
+        TransactionViewModel _viewModel = new TransactionViewModel();
         MainWindow _mainWindow;
 
         public TransactionsView()
