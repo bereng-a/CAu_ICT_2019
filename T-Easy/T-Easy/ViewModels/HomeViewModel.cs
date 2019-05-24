@@ -6,6 +6,7 @@ namespace T_Easy.ViewModels
     public class HomeViewModel : ObservableObject, IPageViewModel
     {
         public string Icon { get; } = "HomeAccount";
+        public string Visible { get; } = "Visible ";
 
         public string Name
         {

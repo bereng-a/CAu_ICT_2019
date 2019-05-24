@@ -6,6 +6,9 @@ using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
 {
+    /// <summary>
+    /// Class who's managing all the views and the navigation
+    /// </summary>
     public class MainViewModel : ObservableObject
     {
         #region Fields
@@ -23,6 +26,7 @@ namespace T_Easy.ViewModels
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new UserViewModel());
             PageViewModels.Add(new UserAddViewModel());
+            PageViewModels.Add(new DestinationViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

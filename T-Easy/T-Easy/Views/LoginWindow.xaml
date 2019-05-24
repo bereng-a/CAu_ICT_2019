@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="T-Easy" Height="500" Width="950">
+        Title="T-Easy" Height="600" Width="1000">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="../Ressources/background.jpg" Stretch="UniformToFill"/>
@@ -29,10 +29,10 @@
                     <ColumnDefinition Width="422*" />
                     <ColumnDefinition Width="227*" />
                 </Grid.ColumnDefinitions>
-                <TextBox materialDesign:HintAssist.Hint="Sharing Code" Name="SharingCodeTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="244" Text="{Binding SharingCode}"  Height="40" Margin="81,41,97.4,41.4" TextChanged="SharingCodeTextBox_TextChanged" />
+                <TextBox materialDesign:HintAssist.Hint="Sharing Code" Name="SharingCodeTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding SharingCode}"  Height="40" Margin="81,41,97.4,41.4" TextChanged="SharingCodeTextBox_TextChanged" />
                 <Button IsEnabled="False" Grid.Row="0" Grid.Column="1" Name="Join_Button" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Join !"  Width="98" Height="25" Margin="61.6,49,67.6,48.4" Click="Join_Button_Click"></Button>
 
-                <TextBox materialDesign:HintAssist.Hint="Name" Name="CreateTravelTextBox"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="244" Text="{Binding Name}"  Height="40" Margin="81,40.6,97.4,41.8" TextChanged="CreateTravelTextBox_TextChanged"  />
+                <TextBox materialDesign:HintAssist.Hint="Name" Name="CreateTravelTextBox"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Name}"  Height="40" Margin="81,40.6,97.4,41.8" TextChanged="CreateTravelTextBox_TextChanged"  />
                 <Button Name="Create_Button" IsEnabled="False" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create !"  Width="98" Height="25" Margin="61.6,48.6,67.6,48.8" Click="Button_Click"></Button>
 
             </Grid>

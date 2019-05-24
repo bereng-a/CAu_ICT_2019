@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="T-Easy" Height="450" Width="800">
+        Title="T-Easy" Height="600" Width="1000">
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:HomeViewModel}">
             <local1:HomeView></local1:HomeView>
@@ -24,6 +24,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:UserAddViewModel}">
             <local1:UserAddView></local1:UserAddView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DestinationViewModel}">
+            <local1:DestinationView></local1:DestinationView>
         </DataTemplate>
     </Window.Resources>
 
