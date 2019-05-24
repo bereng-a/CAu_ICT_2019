@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using T_Easy.Helper;
 using T_Easy.Utils;
 
 namespace T_Easy.ViewModels
@@ -71,6 +72,13 @@ namespace T_Easy.ViewModels
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return TravelHelper.Instance.Travel.Name;
+            }
+        }
         #endregion
 
         #region Methods

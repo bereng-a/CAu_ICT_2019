@@ -26,9 +26,15 @@
             <local1:UserAddView></local1:UserAddView>
         </DataTemplate>
     </Window.Resources>
- 
+
+
 
     <DockPanel>
+        <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="2" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" Text="{Binding Name}"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
         <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
             <ItemsControl ItemsSource="{Binding PageViewModels}">
                 <ItemsControl.ItemTemplate>

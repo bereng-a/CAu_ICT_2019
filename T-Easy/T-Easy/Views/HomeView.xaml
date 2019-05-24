@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:T_Easy.Views"
-      mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -15,14 +16,17 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="439*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="39*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="COUCOU" Grid.ColumnSpan="2" Margin="0,0,0,-0.4" Grid.RowSpan="2"></TextBlock>
+        <DockPanel>
+            <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
+                <StackPanel>
+                    <Expander HorizontalAlignment="Stretch" Header="Sharing code">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <TextBlock Text="Copy and share this code with your friends" />
+                            <TextBox BorderThickness="0" Opacity=".68" Text="{Binding SharingCode, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True"/>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </materialDesign:Card>
+        </DockPanel>
     </Grid>
 </UserControl>
