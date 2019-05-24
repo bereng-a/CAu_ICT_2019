@@ -20,12 +20,6 @@ A step by step series of examples that tell you have to get a development env ru
 git clone https://github.com/bereng-a/CAu_ICT_2019.git
 ```
 
-2. Second
-
-```
-nothing
-```
-
 ## Running the tests
 
 ## Useful links
