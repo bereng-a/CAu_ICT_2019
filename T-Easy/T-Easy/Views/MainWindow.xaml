@@ -25,6 +25,12 @@
         <DataTemplate DataType="{x:Type local:UserAddViewModel}">
             <local1:UserAddView></local1:UserAddView>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TransactionsViewModel}">
+            <local1:TransactionsView></local1:TransactionsView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TransactionAddViewModel}">
+            <local1:TransactionAddView></local1:TransactionAddView>
+        </DataTemplate>
     </Window.Resources>
 
 
