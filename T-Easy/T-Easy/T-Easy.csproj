@@ -166,8 +166,6 @@
     </ApplicationDefinition>
     <Compile Include="Helper\DestinationHelper.cs" />
     <Compile Include="Helper\TravelHelper.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Destination.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentType.cs" />
@@ -185,6 +183,12 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionAddView.xaml.cs">
+      <DependentUpon>TransactionAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionsView.xaml.cs">
+      <DependentUpon>TransactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAddView.xaml.cs">
       <DependentUpon>UserAddView.xaml</DependentUpon>
@@ -222,6 +226,13 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionAddView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

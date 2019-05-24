@@ -12,12 +12,11 @@ namespace T_Easy.Models
 
         public int Id { get; set; }
         public int TravelId { get; set; }
-        public int CityId { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
+        public string Address { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Travel Travel { get; set; }
+        public virtual Travel IdNavigation { get; set; }
         public virtual ICollection<Event> Event { get; set; }
     }
 }
