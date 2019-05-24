@@ -6,7 +6,7 @@ A windows application to schedule and manage travels with friends
 
 ### Prerequies
 
-What things you need to work on this project
+What things you need to install to work on this project
 
 > visual studio 2017
 
@@ -23,10 +23,10 @@ git clone https://github.com/bereng-a/CAu_ICT_2019.git
 ## Running the tests
 
 ## Useful links
+- [Material Design](http://materialdesigninxaml.net/)
 
 ### Website
 - [Wiki](https://github.com/bereng-a/CAu_ICT_2019/wiki)
-- [Website](http://youpomm.com/)
 
 ## Authors
 
