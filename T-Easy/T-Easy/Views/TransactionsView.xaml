@@ -20,9 +20,12 @@
           CanUserSortColumns="True"
           CanUserAddRows="False" Height="376" VerticalAlignment="Top">
         </DataGrid>
-        <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Add User" Click="Button_Click" RenderTransformOrigin="3.946,6.862" Height="Auto" Margin="702,389,34,34">
-            _ADD
+        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="Add new transaction" Click="Button_Click">
+            <materialDesign:PackIcon
+                Kind="TrolleyPlus"
+                Height="24"
+                Width="24" />
         </Button>
     </Grid>
 </UserControl>

@@ -15,18 +15,70 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <!--<ComboBox
-            materialDesign:HintAssist.Hint="(float hint)"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="EuroSymbol" Foreground="{Binding ElementName=CostTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox x:Name="CostTextBox"
+            materialDesign:HintAssist.Hint="Cost" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <TextBox.Text>
+                <Binding
+                    Path="Cost"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox
+            materialDesign:HintAssist.Hint="User"
+            Grid.Row="1" Grid.Column="1"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Users}"
             MinWidth="72"
-      Margin="16 0 0 0"
-      ItemsSource="{Binding Users}"
-      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            SelectedValue="{Binding SelectedValueOne}">
+            <ComboBox.SelectedItem>
+                <Binding
+                      Path="TransactionUser"
+                      Mode="TwoWay"
+                      UpdateSourceTrigger="PropertyChanged">                 
+                </Binding>
+            </ComboBox.SelectedItem>
             <ComboBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel />
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
-        </ComboBox>-->
+        </ComboBox>
+        <ComboBox
+            materialDesign:HintAssist.Hint="Event"
+            Grid.Row="2" Grid.Column="1"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Events}"
+            MinWidth="72"
+            SelectedValue="{Binding SelectedValueOne}">
+            <ComboBox.SelectedItem>
+                <Binding
+                      Path="TransactionEvent"
+                      Mode="TwoWay"
+                      UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </ComboBox.SelectedItem>
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
         <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"
                 ToolTip="Add Transaction" Grid.Column="4" Grid.Row="4" Click="Button_Click">
