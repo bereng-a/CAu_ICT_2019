@@ -7,7 +7,6 @@ namespace T_Easy.Models
     {
         public Travel()
         {
-            Destination = new HashSet<Destination>();
             Document = new HashSet<Document>();
             User = new HashSet<User>();
         }
@@ -17,7 +16,7 @@ namespace T_Easy.Models
         public string SharingCode { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public virtual ICollection<Destination> Destination { get; set; }
+        public virtual Destination Destination { get; set; }
         public virtual ICollection<Document> Document { get; set; }
         public virtual ICollection<User> User { get; set; }
     }

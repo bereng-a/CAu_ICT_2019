@@ -15,8 +15,6 @@ namespace T_Easy.Models
         {
         }
 
-        public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Destination> Destination { get; set; }
         public virtual DbSet<Document> Document { get; set; }
         public virtual DbSet<DocumentType> DocumentType { get; set; }
@@ -30,6 +28,7 @@ namespace T_Easy.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=rds-mariadb-teasy.cjfzscpznbxa.ap-northeast-2.rds.amazonaws.com;port=3306;user=eden;password=toto42sh;database=teasy");
             }
         }
@@ -38,70 +37,23 @@ namespace T_Easy.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity<City>(entity =>
-            {
-                entity.ToTable("City", "teasy");
-
-                entity.HasIndex(e => e.CountryId)
-                    .HasName("Cities_fk0");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.CountryId)
-                    .HasColumnName("country_id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Country)
-                    .WithMany(p => p.City)
-                    .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Cities_fk0");
-            });
-
-            modelBuilder.Entity<Country>(entity =>
-            {
-                entity.ToTable("Country", "teasy");
-
-                entity.HasIndex(e => e.Name)
-                    .HasName("name")
-                    .IsUnique();
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Destination>(entity =>
             {
                 entity.ToTable("Destination", "teasy");
-
-                entity.HasIndex(e => e.CityId)
-                    .HasName("Destinations_fk1");
 
                 entity.HasIndex(e => e.TravelId)
                     .HasName("Destinations_fk0");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("int(11)")
+                    .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.CityId)
-                    .HasColumnName("city_id")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasColumnName("address")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.FromDate).HasColumnName("from_date");
 
@@ -111,17 +63,11 @@ namespace T_Easy.Models
                     .HasColumnName("travel_id")
                     .HasColumnType("int(11)");
 
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Destination)
-                    .HasForeignKey(d => d.CityId)
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.Destination)
+                    .HasForeignKey<Destination>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Destinations_fk1");
-
-                entity.HasOne(d => d.Travel)
-                    .WithMany(p => p.Destination)
-                    .HasForeignKey(d => d.TravelId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Destinations_fk0");
+                    .HasConstraintName("Destination_FK");
             });
 
             modelBuilder.Entity<Document>(entity =>

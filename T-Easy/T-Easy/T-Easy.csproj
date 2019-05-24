@@ -159,8 +159,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\TravelHelper.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Destination.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentType.cs" />
