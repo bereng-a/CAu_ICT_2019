@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaterialDesignThemes.Wpf;
+using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using T_Easy.ViewModels;
 
 namespace T_Easy.Views
@@ -25,6 +17,7 @@ namespace T_Easy.Views
         private bool DateFrom = false;
         private bool DateTo = false;
         private bool CheckAddress = false;
+        private int CurrentDestination;
         
         public DestinationView()
         {
@@ -81,6 +74,45 @@ namespace T_Easy.Views
         {
             _viewModel.AddDestination();
             DestinationDialog.IsOpen = false;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Cancel_Event_Click(object sender, RoutedEventArgs e)
+        {
+            NewEventCost.Text = "";
+            NewEventDate.Text = "";
+            NewEventTime.Text = "";
+            NewEventTypes.Text = "";
+            NewEventName.Text = "";
+            NewEventDescription.Text = "";
+        }
+
+        private void Add_Event_In_Destination_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            CurrentDestination = (int)button.Tag;
+            Console.WriteLine("Destination id : " + CurrentDestination);
+        }
+
+        private void Add_Event_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.AddEvent(CurrentDestination);
+            EventDialog.IsOpen = false;
+        }
+
+        private void NewEventDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.UpdateEventDate(NewEventDate.Text);
+        }
+
+        private void NewEventTime_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            _viewModel.UpdateEventTime(NewEventTime.Text);
         }
     }
 }

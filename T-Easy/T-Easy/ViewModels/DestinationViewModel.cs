@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Media.Imaging;
 using T_Easy.Helper;
 using T_Easy.Models;
@@ -18,11 +17,19 @@ namespace T_Easy.ViewModels
         public BitmapImage Map { get; set; }
         public string Visible { get; } = "Visible ";
         public ObservableCollection<Destination> Destinations { get; set; }
+        public ObservableCollection<EventType> EventTypes { get; }
+        public EventType NewEventType { get; set; }
+        public int NewEventCost { get; set; }
+        public DateTime NewEventDate { get; set; }
+        public DateTime NewEventTime { get; set; }
+        public string NewEventName { get; set; }
+        public string NewEventDescription { get; set; }
         #endregion
 
         public DestinationViewModel()
         {
             Destinations = DestinationHelper.Instance.Destinations;
+            EventTypes = DestinationHelper.Instance.EventTypes;
         }
 
         #region Methods
@@ -55,9 +62,30 @@ namespace T_Easy.ViewModels
                 NewDestinationTo = Convert.ToDateTime(date);
         }
 
+        public void UpdateEventDate(string date)
+        {
+            if (date.Length > 0)
+                NewEventDate = Convert.ToDateTime(date);
+        }
+
+        public void UpdateEventTime(string date)
+        {
+            if (date.Length > 0)
+                NewEventTime = Convert.ToDateTime(date);
+        }
+
         public void AddDestination()
         {
             DestinationHelper.Instance.AddDestination(new Destination { FromDate = NewDestinationFrom, ToDate = NewDestinationTo, Address = Address});
+            Destinations = DestinationHelper.Instance.Destinations;
+            OnPropertyChanged("Destinations");
+        }
+
+        public void AddEvent(int destinationId)
+        {
+            Console.WriteLine("Type " + NewEventType.Name);
+            var date = new DateTime(NewEventDate.Year, NewEventDate.Month, NewEventDate.Day, NewEventTime.Hour, NewEventTime.Minute, 0);
+            DestinationHelper.Instance.AddEvent(new Event { Cost = NewEventCost, DestinationId = destinationId, Name = NewEventName, FromDate = date, ToDate = date, TypeId = NewEventType.Id, Description = NewEventDescription });
             Destinations = DestinationHelper.Instance.Destinations;
             OnPropertyChanged("Destinations");
         }

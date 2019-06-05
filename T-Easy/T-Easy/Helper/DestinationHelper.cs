@@ -1,6 +1,7 @@
 ﻿using Google.Maps;
 using Google.Maps.Geocoding;
 using Google.Maps.StaticMaps;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace T_Easy.Helper
         #region Members
         private static readonly DestinationHelper _instance = new DestinationHelper();
         private ObservableCollection<Destination> _destinations;
+        private ObservableCollection<EventType> _eventTypes;
         private const string API_KEY = "AIzaSyActMHNUddNilt6hRqmgiG3AJLBxEuFTCM";
         #endregion
 
@@ -26,8 +28,10 @@ namespace T_Easy.Helper
         private DestinationHelper()
         {
             Models.DataContext context = new Models.DataContext();
-            var destinations = context.Destination.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).ToList();
+            var destinations = context.Destination.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).Include(x => x.Event).ToList();
             _destinations = new ObservableCollection<Destination>(destinations);
+            var eventTypes = context.EventType.ToList();
+            _eventTypes = new ObservableCollection<EventType>(eventTypes);
         }
         #endregion
 
@@ -45,6 +49,14 @@ namespace T_Easy.Helper
             get
             {
                 return _destinations;
+            }
+        }
+
+        public ObservableCollection<EventType> EventTypes
+        {
+            get
+            {
+                return _eventTypes;
             }
         }
         #endregion
@@ -91,6 +103,14 @@ namespace T_Easy.Helper
             context.Destination.Add(destination);
             context.SaveChanges();
             _destinations.Add(destination);
+        }
+
+        public void AddEvent(Event newEvent)
+        {
+            Models.DataContext context = new Models.DataContext();
+            context.Event.Add(newEvent);
+            context.SaveChanges();
+            _destinations.Where(d => d.Id == newEvent.DestinationId).First().Event.Add(newEvent);
         }
     }
 }

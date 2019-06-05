@@ -22,31 +22,83 @@
                         <RowDefinition Height="359*"></RowDefinition>
                         <RowDefinition Height="71*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ListView ItemsSource="{Binding Destinations}" Margin="0,0,0,13.2">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}" >
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border Background="Transparent">
-                                                <Expander HorizontalAlignment="Stretch" Header="{Binding Address}">
-                                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                                        <TextBlock Text="{Binding FromDate, StringFormat='From : {0:d}'}"/>
-                                                        <TextBlock Text="{Binding ToDate, StringFormat='To : {0:d}'}" />
-                                                    </StackPanel>
-                                                </Expander>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-
-
-
-
-
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                    <materialDesign:DialogHost x:Name="EventDialog">
+                        <ListView ItemsSource="{Binding Destinations}" Margin="0,0,0,13.2">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}" >
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                <Border Background="Transparent">
+                                                    <Expander HorizontalAlignment="Stretch" Header="{Binding Address}">
+                                                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                                            <TextBlock Text="{Binding FromDate, StringFormat='From : {0:d}'}"/>
+                                                            <TextBlock Text="{Binding ToDate, StringFormat='To : {0:d}'}" />
+                                                            <Button Tag="{Binding Id}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" HorizontalAlignment="Right" Click="Add_Event_In_Destination_Click">
+                                                                <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
+                                                            </Button>
+                                                            <ListView ItemsSource="{Binding Event}">
+                                                                <ListView.View>
+                                                                    <GridView>
+                                                                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                                                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type.Name}" />
+                                                                        <GridViewColumn Header="Date" DisplayMemberBinding="{Binding FromDate}" />
+                                                                        <GridViewColumn Header="Cost"  DisplayMemberBinding="{Binding Cost}" />
+                                                                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                                                                    </GridView>
+                                                                </ListView.View>
+                                                            </ListView>
+                                                        </StackPanel>
+                                                    </Expander>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
+                                <TextBlock Grid.Row="0"> Add event</TextBlock>
+                                <TextBox x:Name="NewEventName" materialDesign:HintAssist.Hint="Name" Text="{Binding NewEventName}"/>
+                                <DatePicker x:Name="NewEventDate" VerticalAlignment="Center" Grid.Row="0" Width="100" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDateChanged="NewEventDate_SelectedDateChanged"/>
+                                <materialDesign:TimePicker x:Name="NewEventTime" VerticalAlignment="Center" Grid.Row="0" Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" materialDesign:HintAssist.Hint="Pick time" SelectedTimeChanged="NewEventTime_SelectedTimeChanged"/>
+                                <TextBox x:Name="NewEventCost" materialDesign:HintAssist.Hint="Cost" PreviewTextInput="NumberValidationTextBox" Text="{Binding NewEventCost}"/>
+                                <ComboBox x:Name="NewEventTypes" materialDesign:HintAssist.Hint="Type" VerticalAlignment="Center" ItemsSource="{Binding EventTypes}" MinWidth="72" SelectedValue="{Binding NewEventType}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel />
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                </ComboBox>
+                                <TextBox x:Name="NewEventDescription" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Height="100"
+                                    AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Description" Text="{Binding NewEventDescription}"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button  x:Name="AddEventButton" IsEnabled="True" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Event_Click">
+                                        <Button.CommandParameter>
+                                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                True
+                                            </system:Boolean>
+                                        </Button.CommandParameter>
+                                        ADD
+                                    </Button>
+                                    <Button Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand" Click="Cancel_Event_Click">
+                                        <Button.CommandParameter>
+                                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                False
+                                            </system:Boolean>
+                                        </Button.CommandParameter>
+                                        CANCEL
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </materialDesign:DialogHost.DialogContent>
+                    </materialDesign:DialogHost>
                     <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10.4">
                         <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
