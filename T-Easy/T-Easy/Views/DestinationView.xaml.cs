@@ -52,6 +52,7 @@ namespace T_Easy.Views
         {
             if (DestinationTextBox.Text.Length > 0)
             {
+
                 CheckAddressButton.IsEnabled = true;
             }
             else
@@ -63,14 +64,15 @@ namespace T_Easy.Views
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateFrom = true;
+            _viewModel.UpdateFromDate(NewFrom.Text);
             if (DateTo && CheckAddress)
                 AddButton.IsEnabled = true;
-
         }
 
         private void DatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DateTo = true;
+            _viewModel.UpdateToDate(NewTo.Text);
             if (DateFrom && CheckAddress)
                 AddButton.IsEnabled = true;
         }

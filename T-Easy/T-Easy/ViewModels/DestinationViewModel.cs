@@ -43,6 +43,18 @@ namespace T_Easy.ViewModels
             return false;
         }
 
+        public void UpdateFromDate(string date)
+        {
+            if (date.Length > 0)
+                NewDestinationFrom = Convert.ToDateTime(date);
+        }
+
+        public void UpdateToDate(string date)
+        {
+            if (date.Length > 0)
+                NewDestinationTo = Convert.ToDateTime(date);
+        }
+
         public void AddDestination()
         {
             DestinationHelper.Instance.AddDestination(new Destination { FromDate = NewDestinationFrom, ToDate = NewDestinationTo, Address = Address});
