@@ -23,7 +23,7 @@ namespace T_Easy.Views
         {
             _viewModel.createTransaction();
             MainViewModel tmp = (MainViewModel)_mainWindow.DataContext;
-            tmp.ChangeViewModel(tmp.PageViewModels[4]);
+            tmp.ChangeViewModel(tmp.PageViewModels[3]);
         }
     }
 }
