@@ -26,7 +26,7 @@ namespace T_Easy.Views
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainViewModel tmp = (MainViewModel)_mainWindow.DataContext;
-            tmp.ChangeViewModel(tmp.PageViewModels[4]);
+            tmp.ChangeViewModel(tmp.PageViewModels[5]);
         }
     }
 }

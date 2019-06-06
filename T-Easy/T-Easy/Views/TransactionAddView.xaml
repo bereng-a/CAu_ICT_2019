@@ -34,7 +34,7 @@
             materialDesign:HintAssist.Hint="Cost" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <TextBox.Text>
                 <Binding
-                    Path="Cost"
+                    Path="TransactionCost"
                     UpdateSourceTrigger="PropertyChanged">
                 </Binding>
             </TextBox.Text>
@@ -44,6 +44,7 @@
             Grid.Row="1" Grid.Column="1"
             VerticalAlignment="Center"
             ItemsSource="{Binding Users}"
+            DisplayMemberPath="Name"
             MinWidth="72"
             SelectedValue="{Binding SelectedValueOne}">
             <ComboBox.SelectedItem>
@@ -64,7 +65,8 @@
             Grid.Row="2" Grid.Column="1"
             VerticalAlignment="Center"
             ItemsSource="{Binding Events}"
-            MinWidth="72"
+            DisplayMemberPath="Name"
+                MinWidth="72"
             SelectedValue="{Binding SelectedValueOne}">
             <ComboBox.SelectedItem>
                 <Binding

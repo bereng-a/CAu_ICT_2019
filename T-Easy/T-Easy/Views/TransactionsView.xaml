@@ -14,12 +14,16 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid
-          Margin="0,8,0,0"
-          ItemsSource="{Binding Transactions}"
-          CanUserSortColumns="True"
-          CanUserAddRows="False" Height="376" VerticalAlignment="Top">
-        </DataGrid>
+        <ListView ItemsSource="{Binding Transactions}">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Event.Name}" Header="Event name" Width="auto"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=User.Name}" Header="Name" Width="auto"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat='{}{0:MM/dd/yyyy}'}" Header="Creation date" Width="auto"/>
+            </GridView>
+        </ListView.View>
+    </ListView>
         <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
                 ToolTip="Add new transaction" Click="Button_Click">
             <materialDesign:PackIcon
