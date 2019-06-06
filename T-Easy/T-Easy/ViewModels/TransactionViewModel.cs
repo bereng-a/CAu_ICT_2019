@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using T_Easy.Helper;
 using T_Easy.Models;
@@ -42,7 +44,7 @@ namespace T_Easy.ViewModels
         private ObservableCollection<Transaction> getTransaction()
         {
             Models.DataContext context = new Models.DataContext();
-            var transactions = context.Transaction.Where(x => x.User.TravelId == TravelHelper.Instance.Travel.Id).ToList();
+            var transactions = context.Transaction.Where(x => x.User.TravelId == TravelHelper.Instance.Travel.Id).Include(x => x.User).Include(x => x.Event).ToList();
             return new ObservableCollection<Transaction>(transactions);
         }
 
@@ -74,11 +76,11 @@ namespace T_Easy.ViewModels
         public void createTransaction()
         {
             Models.DataContext context = new Models.DataContext();
-            context.Transaction.Add(new Transaction { EventId = TransactionEvent.Id, UserId = TransactionUser.Id, Cost = TransactionCost, Event = TransactionEvent, User = TransactionUser });
+            context.Transaction.Add(new Transaction { EventId = TransactionEvent.Id, UserId = TransactionUser.Id, Cost = TransactionCost, CreatedAt = System.DateTime.Now});
             context.SaveChanges();
         }
 
-        
+
         #endregion
     }
 }
