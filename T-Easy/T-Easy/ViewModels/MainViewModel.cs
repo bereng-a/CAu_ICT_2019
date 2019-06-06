@@ -25,7 +25,6 @@ namespace T_Easy.ViewModels
             // Add available pages
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new UserViewModel());
-            PageViewModels.Add(new UserAddViewModel());
             PageViewModels.Add(new DestinationViewModel());
             PageViewModels.Add(new TransactionViewModel());
             PageViewModels.Add(new TransactionAddViewModel());

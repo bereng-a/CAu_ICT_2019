@@ -13,39 +13,65 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ItemsControl ItemsSource="{Binding Users}" Grid.IsSharedSizeScope="True">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        x:Name="Border"
-                        Padding="8"
-                        BorderThickness="0 0 0 1"
-                        BorderBrush="{DynamicResource MaterialDesignDivider}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="Checkerz" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Button
-                                VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                Content="P" />
-                            <StackPanel Margin="8 0 0 0" Grid.Column="1">
-                                <TextBlock FontWeight="Bold" Text="{Binding Name}" />
-                                <TextBlock Text="{Binding FamilyName}" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="Add new user" Click="Button_Click">
-            <materialDesign:PackIcon
-                Kind="AccountMultiplePlus"
-                Height="24"
-                Width="24" />
-        </Button>
+
+        <Grid>
+        <materialDesign:DialogHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,9.6" x:Name="DestinationDialog">
+            <Border BorderThickness="0" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource PrimaryHueMidBrush}" ClipToBounds="True">
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Users}" Grid.IsSharedSizeScope="True">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    x:Name="Border"
+                                    Padding="8"
+                                    BorderThickness="0 0 0 1"
+                                    BorderBrush="{DynamicResource MaterialDesignDivider}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="Checkerz" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Button
+                                            VerticalAlignment="Center"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                                            <materialDesign:PackIcon Kind="AccountHeart" />
+                                        </Button>
+                                        <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                                            <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding FamilyName}" />
+                                        </StackPanel>
+                                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Grid.Column="2"
+                                                ToolTip="Remove User" Click="Button_Click" Tag="{Binding Id}">
+                                            <materialDesign:PackIcon Kind="AccountRemove" Height="24" 
+                                                Width="24" />
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10.4">
+                        <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
+                    </Button>
+                </Grid>
+            </Border>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
+                    <TextBlock Grid.Row="0"> Add a new user</TextBlock>
+                    <TextBox materialDesign:HintAssist.Hint="Name" Text="{Binding Name}"/>
+                    <TextBox materialDesign:HintAssist.Hint="FamilyName" Text="{Binding FamilyName}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="AddButton" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Button_Click">
+                            ADD
+                        </Button>
+                        <Button Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand">
+                            CANCEL
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
     </Grid>
 </UserControl>

@@ -11,6 +11,9 @@ namespace T_Easy.ViewModels
     class DocumentViewModel : ObservableObject, IPageViewModel
     {
         public string Icon { get; } = "HomeAccount";
+
+        public string Name { get; } = "Document Manager";
+
         public User User { get; set; }
         public DocumentType Type { get; set; }
         public string Path { get; set; }
@@ -30,7 +33,10 @@ namespace T_Easy.ViewModels
         private async void GetData()
         {
             Models.DataContext context = new Models.DataContext();
-            var docs = await context.Document.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id).Include(x => x.User).Include(x => x.Type).ToListAsync();
+            var docs = await context.Document.Where(x => x.TravelId == TravelHelper.Instance.Travel.Id)
+                                             .Include(x => x.User)
+                                             .Include(x => x.Type)
+                                             .ToListAsync();
             Documents = new ObservableCollection<Document>(docs);
         }
 
@@ -53,6 +59,18 @@ namespace T_Easy.ViewModels
             Models.DataContext context = new Models.DataContext();
             await context.Document.AddAsync(new Document { UserId = User.Id, TypeId = Type.Id, TravelId = TravelHelper.Instance.Travel.Id, Path = Path, EventId = EventId });
             await context.SaveChangesAsync();
+            GetData();
+            OnPropertyChanged("Documents");
+        }
+
+        public async void DeleteDocument(int id)
+        {
+            Models.DataContext context = new Models.DataContext();
+            Document tmp = new Document { Id = id };
+            context.Document.Remove(tmp);
+            await context.SaveChangesAsync();
+            GetData();
+            OnPropertyChanged("Documents");
         }
     }
 }

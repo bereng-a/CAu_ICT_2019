@@ -185,7 +185,6 @@
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\TransactionAddViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
-    <Compile Include="ViewModels\UserAddViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\DestinationView.xaml.cs">
       <DependentUpon>DestinationView.xaml</DependentUpon>
@@ -201,9 +200,6 @@
     </Compile>
     <Compile Include="Views\TransactionsView.xaml.cs">
       <DependentUpon>TransactionsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserAddView.xaml.cs">
-      <DependentUpon>UserAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
@@ -249,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TransactionsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

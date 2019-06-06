@@ -22,9 +22,6 @@
         <DataTemplate DataType="{x:Type local:UserViewModel}">
             <local1:UserView></local1:UserView>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:UserAddViewModel}">
-            <local1:UserAddView></local1:UserAddView>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type local:DestinationViewModel}">
             <local1:DestinationView></local1:DestinationView>
         </DataTemplate>
@@ -38,8 +35,6 @@
             <local1:DocumentView></local1:DocumentView>
         </DataTemplate>
     </Window.Resources>
-
-
 
     <DockPanel>
         <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="2" DockPanel.Dock="Top">

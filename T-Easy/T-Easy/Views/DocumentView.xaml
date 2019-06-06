@@ -40,6 +40,17 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn Header="Download">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                                ToolTip="Remove User" Click="Button_Click" Tag="{Binding Id}">
+                                                <materialDesign:PackIcon Kind="FolderRemove" Height="24" 
+                                                Width="24" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
