@@ -47,7 +47,6 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" 
-                                ToolTip="{Binding Icon}"
                                 Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 CommandParameter="{Binding}"
                                 Margin="8"

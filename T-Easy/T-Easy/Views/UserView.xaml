@@ -34,7 +34,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Button
                                             VerticalAlignment="Center"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" IsEnabled="False">
                                             <materialDesign:PackIcon Kind="AccountHeart" />
                                         </Button>
                                         <StackPanel Margin="8 0 0 0" Grid.Column="1">
@@ -60,13 +60,13 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
                     <TextBlock Grid.Row="0"> Add a new user</TextBlock>
-                    <TextBox materialDesign:HintAssist.Hint="Name" Text="{Binding Name}"/>
-                    <TextBox materialDesign:HintAssist.Hint="FamilyName" Text="{Binding FamilyName}"/>
+                    <TextBox x:Name="NameField" materialDesign:HintAssist.Hint="Name" Text="{Binding Name}" TextChanged="NameField_TextChanged"/>
+                    <TextBox x:Name="FamilyNameField" materialDesign:HintAssist.Hint="Family Name" Text="{Binding FamilyName}" TextChanged="FamilyNameField_TextChanged"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="AddButton" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Button_Click">
+                        <Button x:Name="AddButton" Grid.Row="1" IsEnabled="False" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Button_Click">
                             ADD
                         </Button>
-                        <Button Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand">
+                        <Button x:Name="CancelButton" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand" Click="CancelButton_Click">
                             CANCEL
                         </Button>
                     </StackPanel>
