@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace T_Easy.Models
 {
@@ -7,7 +8,7 @@ namespace T_Easy.Models
     {
         public Destination()
         {
-            Event = new HashSet<Event>();
+            Event = new ObservableCollection<Event>();
         }
 
         public int Id { get; set; }
@@ -17,6 +18,6 @@ namespace T_Easy.Models
         public string Address { get; set; }
 
         public virtual Travel IdNavigation { get; set; }
-        public virtual ICollection<Event> Event { get; set; }
+        public virtual ObservableCollection<Event> Event { get; set; }
     }
 }

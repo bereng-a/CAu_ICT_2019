@@ -14,10 +14,20 @@ namespace T_Easy.Views
     public partial class DestinationView : UserControl
     {
         DestinationViewModel _viewModel = new DestinationViewModel();
+        
+        // Variables to check if all fields for add a destination are filled
         private bool DateFrom = false;
         private bool DateTo = false;
         private bool CheckAddress = false;
-        private int CurrentDestination;
+
+        // Variables to check if all fields for add an event are filled
+        private bool EventDate = false;
+        private bool EventTime = false;
+        private bool EventName = false;
+        private bool EventType = false;
+        private bool EventDescription = false;
+
+        private int CurrentDestination; // To associate a new event with the correspondant destination
         
         public DestinationView()
         {
@@ -84,7 +94,7 @@ namespace T_Easy.Views
 
         private void Cancel_Event_Click(object sender, RoutedEventArgs e)
         {
-            NewEventCost.Text = "";
+            NewEventCost.Text = "0";
             NewEventDate.Text = "";
             NewEventTime.Text = "";
             NewEventTypes.Text = "";
@@ -96,23 +106,94 @@ namespace T_Easy.Views
         {
             var button = sender as Button;
             CurrentDestination = (int)button.Tag;
-            Console.WriteLine("Destination id : " + CurrentDestination);
         }
 
         private void Add_Event_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.AddEvent(CurrentDestination);
             EventDialog.IsOpen = false;
+            NewEventCost.Text = "0";
+            NewEventDate.Text = "";
+            NewEventTime.Text = "";
+            NewEventTypes.Text = "";
+            NewEventName.Text = "";
+            NewEventDescription.Text = "";
+        }
+
+        private void UpdateAddEventButton()
+        {
+            if (EventDate && EventDescription && EventType && EventName && EventTime)
+            {
+                AddEventButton.IsEnabled = true;
+            }
+            else
+            {
+                AddEventButton.IsEnabled = false;
+            }
         }
 
         private void NewEventDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            _viewModel.UpdateEventDate(NewEventDate.Text);
+            if (NewEventDate.Text != null && NewEventDate.Text.Length > 0)
+            {
+                EventDate = true;
+                _viewModel.UpdateEventDate(NewEventDate.Text);
+            }
+            else
+            {
+                EventDate = false;
+            }
+            UpdateAddEventButton();
         }
 
         private void NewEventTime_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
-            _viewModel.UpdateEventTime(NewEventTime.Text);
+            if (NewEventTime.Text != null && NewEventTime.Text.Length > 0)
+            {
+                EventTime = true;
+                _viewModel.UpdateEventTime(NewEventTime.Text);
+            }
+            else
+            {
+                EventTime = false;
+            }
+            UpdateAddEventButton();
+        }
+
+        private void NewEventName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (NewEventName.Text.Length > 0)
+                EventName = true;
+            else
+                EventName = false;
+            UpdateAddEventButton();
+        }
+
+        private void NewEventTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EventType = true;
+            UpdateAddEventButton();
+        }
+
+        private void NewEventDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (NewEventDescription.Text.Length > 0)
+                EventDescription = true;
+            else
+                EventDescription = false;
+            UpdateAddEventButton();
+        }
+
+        private void DeleteDestinationButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            _viewModel.DeleteDestination((int)button.Tag);
+        }
+
+        private void DeleteEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            _viewModel.DeleteEvent((int)button.Tag);
         }
     }
 }

@@ -30,14 +30,22 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ListViewItem}">
                                                 <Border Background="Transparent">
-                                                    <Expander HorizontalAlignment="Stretch" Header="{Binding Address}">
+                                                    <Expander HorizontalAlignment="Stretch">
+                                                        <Expander.Header>
+                                                            <DockPanel>
+                                                                <Button Tag="{Binding Id}" x:Name="DeleteDestinationButton" DockPanel.Dock="Right" ToolTip="Delete destination" Click="DeleteDestinationButton_Click">
+                                                                        <materialDesign:PackIcon Kind="DeleteForever" />
+                                                                </Button>
+                                                                <TextBlock Text="{Binding Address}" />
+                                                            </DockPanel>
+                                                        </Expander.Header>
                                                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                                             <TextBlock Text="{Binding FromDate, StringFormat='From : {0:d}'}"/>
                                                             <TextBlock Text="{Binding ToDate, StringFormat='To : {0:d}'}" />
                                                             <Button Tag="{Binding Id}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" HorizontalAlignment="Right" Click="Add_Event_In_Destination_Click">
                                                                 <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
                                                             </Button>
-                                                            <ListView ItemsSource="{Binding Event}">
+                                                            <ListView ItemsSource="{Binding Event, Mode=TwoWay}">
                                                                 <ListView.View>
                                                                     <GridView>
                                                                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
@@ -45,7 +53,19 @@
                                                                         <GridViewColumn Header="Date" DisplayMemberBinding="{Binding FromDate}" />
                                                                         <GridViewColumn Header="Cost"  DisplayMemberBinding="{Binding Cost}" />
                                                                         <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                                                                        <GridViewColumn>
+                                                                            <GridViewColumn.CellTemplate>
+                                                                                <DataTemplate>
+                                                                                    <StackPanel>
+                                                                                        <Button Tag="{Binding Id}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="DeleteEventButton" ToolTip="Delete event" Click="DeleteEventButton_Click" Height="20" Width="20">
+                                                                                            <materialDesign:PackIcon Kind="DeleteForeverOutline" Height="10" Width="10"/>
+                                                                                        </Button>
+                                                                                    </StackPanel>
+                                                                                </DataTemplate>
+                                                                            </GridViewColumn.CellTemplate>
+                                                                        </GridViewColumn>
                                                                     </GridView>
+
                                                                 </ListView.View>
                                                             </ListView>
                                                         </StackPanel>
@@ -60,11 +80,11 @@
                         <materialDesign:DialogHost.DialogContent>
                             <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
                                 <TextBlock Grid.Row="0"> Add event</TextBlock>
-                                <TextBox x:Name="NewEventName" materialDesign:HintAssist.Hint="Name" Text="{Binding NewEventName}"/>
+                                <TextBox x:Name="NewEventName" materialDesign:HintAssist.Hint="Name" Text="{Binding NewEventName}" TextChanged="NewEventName_TextChanged"/>
                                 <DatePicker x:Name="NewEventDate" VerticalAlignment="Center" Grid.Row="0" Width="100" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDateChanged="NewEventDate_SelectedDateChanged"/>
                                 <materialDesign:TimePicker x:Name="NewEventTime" VerticalAlignment="Center" Grid.Row="0" Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" materialDesign:HintAssist.Hint="Pick time" SelectedTimeChanged="NewEventTime_SelectedTimeChanged"/>
                                 <TextBox x:Name="NewEventCost" materialDesign:HintAssist.Hint="Cost" PreviewTextInput="NumberValidationTextBox" Text="{Binding NewEventCost}"/>
-                                <ComboBox x:Name="NewEventTypes" materialDesign:HintAssist.Hint="Type" VerticalAlignment="Center" ItemsSource="{Binding EventTypes}" MinWidth="72" SelectedValue="{Binding NewEventType}">
+                                <ComboBox x:Name="NewEventTypes" materialDesign:HintAssist.Hint="Type" VerticalAlignment="Center" ItemsSource="{Binding EventTypes}" MinWidth="72" SelectedValue="{Binding NewEventType}" SelectionChanged="NewEventTypes_SelectionChanged">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}"/>
@@ -77,9 +97,9 @@
                                     </ComboBox.ItemsPanel>
                                 </ComboBox>
                                 <TextBox x:Name="NewEventDescription" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Height="100"
-                                    AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Description" Text="{Binding NewEventDescription}"/>
+                                    AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Description" Text="{Binding NewEventDescription}" TextChanged="NewEventDescription_TextChanged"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button  x:Name="AddEventButton" IsEnabled="True" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Event_Click">
+                                        <Button x:Name="AddEventButton" IsEnabled="False" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Event_Click">
                                         <Button.CommandParameter>
                                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                 True

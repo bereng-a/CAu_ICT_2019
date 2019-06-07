@@ -100,17 +100,52 @@ namespace T_Easy.Helper
         {
             destination.TravelId = TravelHelper.Instance.Travel.Id;
             Models.DataContext context = new Models.DataContext();
-            context.Destination.Add(destination);
+            var newDestination = context.Destination.Add(destination);
             context.SaveChanges();
-            _destinations.Add(destination);
+            _destinations.Add(newDestination.Entity);
         }
 
-        public void AddEvent(Event newEvent)
+        public void DeleteDestination(int id)
         {
             Models.DataContext context = new Models.DataContext();
-            context.Event.Add(newEvent);
+            Destination tmp = new Destination { Id = id };
+            context.Destination.Remove(tmp);
             context.SaveChanges();
+            _destinations.Remove(_destinations.Where(d => d.Id == id).Single());
+        }
+
+        public void AddEvent(Event newEvent, EventType type)
+        {
+            Models.DataContext context = new Models.DataContext();
+            var eventInDb = context.Event.Add(newEvent);
+            context.SaveChanges();
+            newEvent.Id = eventInDb.Entity.Id;
+            newEvent.Type = type;
             _destinations.Where(d => d.Id == newEvent.DestinationId).First().Event.Add(newEvent);
+        }
+
+        public void DeleteEvent(int idEvent)
+        {
+            Models.DataContext context = new Models.DataContext();
+            Event tmp = new Event { Id = idEvent };
+            context.Event.Remove(tmp);
+            context.SaveChanges();
+
+            Event currentEvent = null;
+            foreach (var destination in _destinations)
+            {
+                foreach (var evt in destination.Event)
+                {
+                    if (evt.Id == idEvent)
+                    {
+                        currentEvent = evt;
+                        break;
+                    }
+                }
+            }
+            if (currentEvent != null) {
+                _destinations.Where(d => d.Id == currentEvent.DestinationId).First().Event.Remove(currentEvent);
+            }
         }
     }
 }

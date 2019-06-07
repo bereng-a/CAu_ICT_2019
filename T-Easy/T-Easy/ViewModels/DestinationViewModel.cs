@@ -81,11 +81,24 @@ namespace T_Easy.ViewModels
             OnPropertyChanged("Destinations");
         }
 
+        public void DeleteDestination(int destinationId)
+        {
+            DestinationHelper.Instance.DeleteDestination(destinationId);
+            Destinations = DestinationHelper.Instance.Destinations;
+            OnPropertyChanged("Destinations");
+        }
+
         public void AddEvent(int destinationId)
         {
-            Console.WriteLine("Type " + NewEventType.Name);
             var date = new DateTime(NewEventDate.Year, NewEventDate.Month, NewEventDate.Day, NewEventTime.Hour, NewEventTime.Minute, 0);
-            DestinationHelper.Instance.AddEvent(new Event { Cost = NewEventCost, DestinationId = destinationId, Name = NewEventName, FromDate = date, ToDate = date, TypeId = NewEventType.Id, Description = NewEventDescription });
+            DestinationHelper.Instance.AddEvent(new Event { Cost = NewEventCost, DestinationId = destinationId, Name = NewEventName, FromDate = date, ToDate = date, TypeId = NewEventType.Id, Description = NewEventDescription }, NewEventType);
+            Destinations = DestinationHelper.Instance.Destinations;
+            OnPropertyChanged("Destinations");
+        }
+
+        public void DeleteEvent(int eventId)
+        {
+            DestinationHelper.Instance.DeleteEvent(eventId);
             Destinations = DestinationHelper.Instance.Destinations;
             OnPropertyChanged("Destinations");
         }
