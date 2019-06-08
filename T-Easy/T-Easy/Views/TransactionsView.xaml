@@ -20,16 +20,23 @@
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Event.Name}" Header="Event name" Width="auto"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=User.Name}" Header="Name" Width="auto"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat='{}{0:MM/dd/yyyy}'}" Header="Creation date" Width="auto"/>
-            </GridView>
+                 <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat='{}{0:MM/dd/yyyy}'}" Header="Creation date" Width="auto"/>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                                ToolTip="Remove Transaction" Click="Button_Click2" Tag="{Binding Id}">
+                                    <materialDesign:PackIcon Kind="Delete" Height="22" Width="22" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
         </ListView.View>
     </ListView>
-        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+        <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10.4"
                 ToolTip="Add new transaction" Click="Button_Click">
-            <materialDesign:PackIcon
-                Kind="TrolleyPlus"
-                Height="24"
-                Width="24" />
+            <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
         </Button>
     </Grid>
 </UserControl>

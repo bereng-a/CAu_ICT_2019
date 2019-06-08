@@ -80,6 +80,15 @@ namespace T_Easy.ViewModels
             context.SaveChanges();
         }
 
+        public async void DeleteTransaction(int id)
+        {
+            Models.DataContext context = new Models.DataContext();
+            Transaction tmp = new Transaction { Id = id };
+            context.Transaction.Remove(tmp);
+            await context.SaveChangesAsync();
+            getTransaction();
+            OnPropertyChanged("Transactions");
+        }
 
         #endregion
     }
