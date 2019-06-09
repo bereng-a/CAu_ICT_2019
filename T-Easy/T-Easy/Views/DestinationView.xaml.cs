@@ -67,7 +67,7 @@ namespace T_Easy.Views
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateFrom = true;
-            _viewModel.UpdateFromDate(NewFrom.Text);
+            //_viewModel.UpdateFromDate(NewFrom.Text);
             if (DateTo && CheckAddress)
                 AddButton.IsEnabled = true;
         }
@@ -75,7 +75,7 @@ namespace T_Easy.Views
         private void DatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DateTo = true;
-            _viewModel.UpdateToDate(NewTo.Text);
+            //_viewModel.UpdateToDate(NewTo.Text);
             if (DateFrom && CheckAddress)
                 AddButton.IsEnabled = true;
         }

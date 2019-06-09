@@ -128,8 +128,8 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
                     <TextBlock Grid.Row="0"> Add a new destination</TextBlock>
-                    <DatePicker x:Name="NewFrom" SelectedDateChanged="DatePicker_SelectedDateChanged_1" Text="{Binding NewDestinationFrom}" Grid.Row="0" HorizontalAlignment="Stretch" materialDesign:HintAssist.Hint="From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                    <DatePicker x:Name="NewTo" SelectedDateChanged="DatePicker_SelectedDateChanged" Text="{Binding NewDestinationTo}" Grid.Row="0" HorizontalAlignment="Stretch" materialDesign:HintAssist.Hint="To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <DatePicker x:Name="NewFrom" SelectedDateChanged="DatePicker_SelectedDateChanged_1" SelectedDate="{Binding NewDestinationFrom}" Grid.Row="0" HorizontalAlignment="Stretch" materialDesign:HintAssist.Hint="From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <DatePicker x:Name="NewTo" SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDate="{Binding NewDestinationTo}" Grid.Row="0" HorizontalAlignment="Stretch" materialDesign:HintAssist.Hint="To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     <TextBox TextChanged="DestinationTextBox_TextChanged" Text="{Binding Address, Mode=TwoWay}" Grid.Row="0" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="DestinationTextBox" materialDesign:HintAssist.Hint="City" />
                     <Button x:Name="CheckAddressButton" IsEnabled="False" Style="{StaticResource MaterialDesignFlatButton}" Content="Check address" Click="Button_Click"></Button>
                     <Image Width="400" Height="400" Source="{Binding Map, Mode=TwoWay}"/>
