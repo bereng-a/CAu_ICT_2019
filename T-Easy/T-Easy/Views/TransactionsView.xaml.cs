@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using T_Easy.ViewModels;
@@ -27,6 +29,13 @@ namespace T_Easy.Views
         {
             MainViewModel tmp = (MainViewModel)_mainWindow.DataContext;
             tmp.ChangeViewModel(tmp.PageViewModels[4]);
+        }
+
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            int id = Int32.Parse(((Button)sender).Tag.ToString());
+            _viewModel.DeleteTransaction(id);
+            MainViewModel tmp = (MainViewModel)_mainWindow.DataContext;
         }
     }
 }
