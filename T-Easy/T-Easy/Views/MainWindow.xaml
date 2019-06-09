@@ -28,9 +28,6 @@
         <DataTemplate DataType="{x:Type local:TransactionViewModel}">
             <local1:TransactionsView></local1:TransactionsView>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:TransactionAddViewModel}">
-            <local1:TransactionAddView></local1:TransactionAddView>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type local:DocumentViewModel}">
             <local1:DocumentView></local1:DocumentView>
         </DataTemplate>

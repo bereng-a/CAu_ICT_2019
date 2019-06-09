@@ -73,11 +73,13 @@ namespace T_Easy.ViewModels
         /// <summary>
         /// Create a transaction
         /// </summary>
-        public void createTransaction()
+        public async void createTransaction()
         {
             Models.DataContext context = new Models.DataContext();
             context.Transaction.Add(new Transaction { EventId = TransactionEvent.Id, UserId = TransactionUser.Id, Cost = TransactionCost, CreatedAt = System.DateTime.Now});
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+            Transactions = getTransaction();
+            OnPropertyChanged("Transactions");
         }
 
         public async void DeleteTransaction(int id)
@@ -86,7 +88,7 @@ namespace T_Easy.ViewModels
             Transaction tmp = new Transaction { Id = id };
             context.Transaction.Remove(tmp);
             await context.SaveChangesAsync();
-            getTransaction();
+            Transactions = getTransaction();
             OnPropertyChanged("Transactions");
         }
 

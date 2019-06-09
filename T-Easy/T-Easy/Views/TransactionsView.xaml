@@ -14,29 +14,101 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView ItemsSource="{Binding Transactions}">
-        <ListView.View>
-            <GridView>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Event.Name}" Header="Event name" Width="auto"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=User.Name}" Header="Name" Width="auto"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="auto"/>
-                 <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat='{}{0:MM/dd/yyyy}'}" Header="Creation date" Width="auto"/>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                                ToolTip="Remove Transaction" Click="Button_Click2" Tag="{Binding Id}">
-                                    <materialDesign:PackIcon Kind="Delete" Height="22" Width="22" />
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-        </ListView.View>
-    </ListView>
-        <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10.4"
-                ToolTip="Add new transaction" Click="Button_Click">
-            <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
-        </Button>
+        <materialDesign:DialogHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,9.6" x:Name="DestinationDialog">
+        <Border BorderThickness="0" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource PrimaryHueMidBrush}" ClipToBounds="True">
+                <Grid>
+                    <ListView ItemsSource="{Binding Transactions}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Event.Name}" Header="Event name" Width="auto"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=User.Name}" Header="Name" Width="auto"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="auto"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat='{}{0:MM/dd/yyyy}'}" Header="Creation date" Width="auto"/>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                                            ToolTip="Remove Transaction" Click="Button_Click2" Tag="{Binding Id}">
+                                                <materialDesign:PackIcon Kind="Delete" Height="22" Width="22" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10.4">
+                        <materialDesign:PackIcon Kind="Plus" Height="22" Width="22" />
+                    </Button>
+                </Grid>
+            </Border>
+
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="500" MinHeight="500">
+                    <TextBlock Grid.Row="0"> Add a new transaction</TextBlock>
+                    <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="EuroSymbol" Foreground="{Binding ElementName=CostTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <TextBox x:Name="CostTextBox"
+                        materialDesign:HintAssist.Hint="Cost" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                        <TextBox.Text>
+                            <Binding
+                                Path="TransactionCost"
+                                UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="User"
+                        Grid.Row="1" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding Users}"
+                        DisplayMemberPath="Name"
+                        MinWidth="72"
+                        SelectedValue="{Binding SelectedValueOne}">
+                        <ComboBox.SelectedItem>
+                            <Binding
+                              Path="TransactionUser"
+                              Mode="TwoWay"
+                              UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Event"
+                        Grid.Row="2" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding Events}"
+                        DisplayMemberPath="Name"
+                            MinWidth="72"
+                        SelectedValue="{Binding SelectedValueOne}">
+                        <ComboBox.SelectedItem>
+                            <Binding
+                              Path="TransactionEvent"
+                              Mode="TwoWay"
+                              UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button  x:Name="AddButton" Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Click="Add_Button_Click">
+                            ADD
+                        </Button>
+                        <Button Grid.Row="1" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand">
+                            CANCEL
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </UserControl>
