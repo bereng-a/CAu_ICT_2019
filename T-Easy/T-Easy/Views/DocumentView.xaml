@@ -28,23 +28,23 @@
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding User.Name}" Header="User"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Type.Name}" Header="Type" />
-                                <GridViewColumn Header="Path" DisplayMemberBinding="{Binding Path}"/>
+                                <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Path}"/>
                                 <GridViewColumn Header="Download">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                                ToolTip="Upload Document" Click="Download" Tag="{Binding Path}">
+                                                ToolTip="Download Document" Click="Download" Tag="{Binding Path}">
                                                 <materialDesign:PackIcon Kind="FileDownloadOutline" Height="24" 
                                                 Width="24" />
                                             </Button>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Download">
+                                <GridViewColumn Header="Remove">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                                ToolTip="Remove User" Click="Button_Click" Tag="{Binding Id}">
+                                                ToolTip="Remove Document" Click="Button_Click" Tag="{Binding Id}">
                                                 <materialDesign:PackIcon Kind="FolderRemove" Height="24" 
                                                 Width="24" />
                                             </Button>
